@@ -1,4 +1,4 @@
-import ticker_sent as ts
+import ticker_sentiment as ts
 import black_scholes as bs
 import gpt_ai as gpt
 import stock_pred as sp
