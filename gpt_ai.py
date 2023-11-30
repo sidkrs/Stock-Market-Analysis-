@@ -1,12 +1,6 @@
 from openai import OpenAI
 
-API_KEY = '/Users/siddarthkerkar/Documents/Projects/stock/chat-gpt_api_key.txt'
-
-# Initialize the OpenAI client
-with open(API_KEY, 'r') as file:
-    # Read the contents of the file
-    key = file.read()
-client = OpenAI(api_key=key)
+client = OpenAI(api_key='enter your api key here')
 
 def chat(user_input):
     # Create a chat completion using the user's input, with a maximum of 200 tokens
