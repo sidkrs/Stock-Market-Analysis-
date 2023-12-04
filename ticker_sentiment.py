@@ -32,7 +32,7 @@ def get_news(keyword):
     Returns: a dataframe of articles
     Does: Connects to the newsapi and returns a dataframe of articles with the given keyword.
     '''
-    newsapi = NewsApiClient(api_key='d5bc67ff273a429f950a14d711c0df2b') 
+    newsapi = NewsApiClient(api_key='enter-api-key') 
     all_articles = newsapi.get_everything(q=keyword)  
     df = pd.json_normalize(all_articles['articles'])
     return df
