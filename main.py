@@ -55,7 +55,7 @@ def ticker_sentiment():
     # Get the average pairwise distances
     apds = ts.apd_stock(basket, pcas)
     most_volatile = max(apds, key=apds.get)
-    print(apds)
+    print(pd.DataFrame(list(apds.items()), columns=['TICKER', 'APD']))
     ts.plot_all_apds(apds)
 
     print(f'The most volatile stock is {most_volatile} with an APD of {apds.get(most_volatile)}')
