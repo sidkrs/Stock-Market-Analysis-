@@ -6,6 +6,12 @@ import re
 URL = 'https://www.cnbc.com/quotes/US3M'
 
 def extract_treasury_rate(url):
+    '''
+    Parameters: url (string) - URL of the webpage to scrape
+    Returns: (float) - The 3-month Treasury Bill rate as a decimal
+    Does: Scrapes the specified URL for the 3-month Treasury Bill rate and returns it as a decimal.
+          It uses BeautifulSoup and regular expressions to extract the rate from the HTML content.
+    '''
     try:
         response = requests.get(url)
         response.raise_for_status()
