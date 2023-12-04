@@ -1,7 +1,7 @@
 from openai import OpenAI
 
 # Define the API key file path
-API_KEY = '/Users/siddarthkerkar/Documents/Projects/stock/chat-gpt_api_key.txt'
+API_KEY = 'textfile_with_api_key.txt'
 
 # Initialize the OpenAI client
 with open(API_KEY, 'r') as file:
