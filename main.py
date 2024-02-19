@@ -6,38 +6,6 @@ import get_rf as rf
 import pandas as pd
 from art import text2art
 
-def market_sentiment():
-    files = fs.get_filenames(fs.SPEECH_DIR)
-    ordered_files = sorted(files, key=fs.get_date_fromfile)
-    dates = fs.store_dates(ordered_files)
-    sentiment_scores = fs.sentiment_scores_pdfs(ordered_files)
-    normalized_sentscores = fs.normalize(sentiment_scores)
-    df = fs.extract_prices(fs.INDEX_DIR)
-    filtered_df = df[df['Date'].isin(dates)]
-    roc_df = fs.df_roc(filtered_df)
-    roc_df['Polarity Score'] = normalized_sentscores
-    corr_df = roc_df.iloc[:-1]
-    
-    # Calculate the correlation between the sentiment scores and the rate of change
-    corr_spy = corr_df['Polarity Score'].corr(corr_df['SPY Rate of Change'])
-    corr_dow = corr_df['Polarity Score'].corr(corr_df['DIA Rate of Change'])
-    corr_vix = corr_df['Polarity Score'].corr(corr_df['VIX Rate of Change'])
-    corr_qqq = corr_df['Polarity Score'].corr(corr_df['QQQ Rate of Change'])
-    
-    # Print the correlation values
-    print(f"Correlation with S&P500: {corr_spy}\n")
-    print(f"Correlation with DOW: {corr_dow}\n")
-    print(f"Correlation with NASDAQ: {corr_qqq}\n")
-    print(f"Correlation with VIX: {corr_vix}\n")
-    
-    # Plot the scatter plots
-    plot = fs.plot_scatter
-    plot(corr_df['Polarity Score'], corr_df['SPY Rate of Change'], 'Fed Speech Sentiment Score vs. S&P500 Rate of Change', 'Normalized Fed Speech Sentiment Scores', '% Change in Index')
-    plot(corr_df['Polarity Score'], corr_df['DIA Rate of Change'], 'Fed Speech Sentiment Score vs. DOW Rate of Change', 'Normalized Fed Speech Sentiment Scores', '% Change in Index')
-    plot(corr_df['Polarity Score'], corr_df['QQQ Rate of Change'], 'Fed Speech Sentiment Score vs. NASDAQ Rate of Change', 'Normalized Fed Speech Sentiment Scores', '% Change in Index')
-    plot(corr_df['Polarity Score'], corr_df['VIX Rate of Change'], 'Fed Speech Sentiment Score vs. VIX Rate of Change', 'Normalized Fed Speech Sentiment Scores', '% Change in Index')
-
-
 def ticker_sentiment():
     '''
     Parameters: None
@@ -145,30 +113,26 @@ def main():
     # Print the menu
     print(combined_art)
     print('\nWhat would you like to do?')
-    print('\n1. Get the sentiment of the market')
-    print('2. Get the sentiment of a basket of stocks')
-    print('3. Predict the price of a stock')
-    print('4. Calculate the price of an option')
-    print('5. Advice from an AI financial advisor')
-    print('6. Exit')
+    print('\n1. Get the sentiment of a basket of stocks')
+    print('2. Predict the price of a stock')
+    print('3. Calculate the price of an option')
+    print('4. Advice from an AI financial advisor')
+    print('5. Exit')
     
     # Get the user's choice
     choice = input('\nEnter a number: ')
-    while choice != '6':
+    while choice != '5':
         # Depending on choice run the function
         if choice == '1':
             print("\n")
-            market_sentiment()
+            ticker_sentiment()
         elif choice == '2':
             print("\n")
-            ticker_sentiment()
+            stock_pred()
         elif choice == '3':
             print("\n")
-            stock_pred()
-        elif choice == '4':
-            print("\n")
             black_scholes()
-        elif choice == '5':
+        elif choice == '4':
             print("\n")
             chat_gpt()
         else:
