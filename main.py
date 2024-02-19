@@ -1,4 +1,3 @@
-import fed_sentiment as fs
 import ticker_sentiment as ts
 import black_scholes as bs
 import gpt_ai as gpt
